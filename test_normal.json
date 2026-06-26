@@ -1,0 +1,14 @@
+{
+  "appName": "app",
+  "userId": "test-user",
+  "sessionId": "test-verify-normal",
+  "newMessage": {
+    "role": "user",
+    "parts": [
+      {
+        "text": "I need to procure 500 units of industrial sensors. My target unit budget is $200 per unit. Standard terms."
+      }
+    ]
+  },
+  "streaming": false
+}

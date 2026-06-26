@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deal Architect - AI Procurement & Negotiation Center</title>
+    <meta name="description" content="AI-powered multi-agent procurement system that automates sourcing, compliance auditing, and contract negotiation.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Symbols / Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="glow-bg glow-bg-2"></div>
+    <div class="app-container">
+        
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="material-symbols-outlined logo-icon">handshake</span>
+                <div class="logo-text">
+                    <h1>DEAL ARCHITECT</h1>
+                    <p class="subtitle">AI Procurement & Multi-Agent Negotiation Center</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button type="button" id="show-arch-btn" class="btn-ghost" title="How it Works">
+                    <span class="material-symbols-outlined">schema</span>
+                    <span>Architecture</span>
+                </button>
+                <div class="header-status">
+                    <span class="status-indicator online"></span>
+                    <span class="status-label">Local Prototype Active</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Agent Pipeline Flow Visualization -->
+        <div class="pipeline-bar glass" id="pipeline-bar">
+            <div class="pipeline-step" id="pipe-orchestrator" data-agent="orchestrator">
+                <div class="pipe-icon-wrap">
+                    <span class="material-symbols-outlined">hub</span>
+                </div>
+                <span class="pipe-label">Orchestrator</span>
+                <div class="pipe-progress"></div>
+            </div>
+            <div class="pipe-connector"><div class="connector-line"></div><span class="material-symbols-outlined connector-arrow">arrow_forward</span></div>
+            <div class="pipeline-step" id="pipe-sourcing" data-agent="sourcing_specialist">
+                <div class="pipe-icon-wrap">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                </div>
+                <span class="pipe-label">Sourcing</span>
+                <div class="pipe-progress"></div>
+            </div>
+            <div class="pipe-connector"><div class="connector-line"></div><span class="material-symbols-outlined connector-arrow">arrow_forward</span></div>
+            <div class="pipeline-step" id="pipe-compliance" data-agent="compliance_auditor">
+                <div class="pipe-icon-wrap">
+                    <span class="material-symbols-outlined">verified_user</span>
+                </div>
+                <span class="pipe-label">Compliance</span>
+                <div class="pipe-progress"></div>
+            </div>
+            <div class="pipe-connector"><div class="connector-line"></div><span class="material-symbols-outlined connector-arrow">arrow_forward</span></div>
+            <div class="pipeline-step" id="pipe-negotiator" data-agent="negotiator">
+                <div class="pipe-icon-wrap">
+                    <span class="material-symbols-outlined">gavel</span>
+                </div>
+                <span class="pipe-label">Negotiator</span>
+                <div class="pipe-progress"></div>
+            </div>
+        </div>
+
+        <!-- Main Workspace -->
+        <main class="app-workspace">
+            
+            <!-- Single Panel Workspace: Interactive Negotiation & Sourcing Desk -->
+            <section class="negotiation-room glass full-width">
+                <div class="section-header">
+                    <div class="title-with-icon">
+                        <span class="material-symbols-outlined">forum</span>
+                        <h2>Interactive Desk</h2>
+                    </div>
+                    <div class="view-tabs">
+                        <button type="button" id="tab-chat" class="tab-btn active">Chat View</button>
+                        <button type="button" id="tab-logs" class="tab-btn">Behind-the-Scenes Logs</button>
+                    </div>
+                    <span class="event-counter" id="event-counter"></span>
+                </div>
+
+                <!-- Chat Room View -->
+                <div id="chat-view" class="chat-view">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="chat-message system">
+                            <span class="material-symbols-outlined msg-avatar">smart_toy</span>
+                            <div class="msg-bubble">
+                                <p>Welcome to the Interactive Sourcing & Negotiation Desk! I am your AI Procurement Orchestrator.</p>
+                                <p>You can type your procurement request directly in the chat below. Please specify the product, quantity, target budget, and any preferred compliance terms (e.g. warranty, lock-in requirements).</p>
+                                <p class="suggestion-header">💡 Quick suggestions (click to load):</p>
+                                <div class="quick-tags chat-tags">
+                                    <button type="button" class="tag-btn" data-text="I need to procure 50 laptops. My target budget is $1200 per unit, with a minimum 3-year warranty.">💻 Sourcing 50 Laptops (budget $1200, 3-yr warranty)</button>
+                                    <button type="button" class="tag-btn" data-text="Source 10 cloud servers with a target budget of $3000 each and no long-term vendor lock-in.">☁️ 10 Cloud Servers ($3000, no lock-in)</button>
+                                    <button type="button" class="tag-btn" data-text="Procure 25 monitors with a budget of $200 per unit.">🖥️ 25 Monitors ($200)</button>
+                                    <button type="button" class="tag-btn" data-text="Please source 80 security cameras. Target budget is $150 each.">📷 80 Security Cameras ($150)</button>
+                                    <button type="button" class="tag-btn" data-text="Procure 150 industrial sensors, budget $45 per unit.">🌡️ 150 Sensors ($45)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Logs Console View (Hidden by default) -->
+                <div id="logs-view" class="logs-view hidden">
+                    <!-- Agent Status Bar -->
+                    <div class="agents-status-bar">
+                        <div class="agent-chip" id="chip-orchestrator">
+                            <span class="dot"></span>
+                            <span class="name">Orchestrator</span>
+                        </div>
+                        <div class="agent-chip" id="chip-sourcing">
+                            <span class="dot"></span>
+                            <span class="name">Sourcing Specialist</span>
+                        </div>
+                        <div class="agent-chip" id="chip-compliance">
+                            <span class="dot"></span>
+                            <span class="name">Compliance Auditor</span>
+                        </div>
+                        <div class="agent-chip" id="chip-negotiator">
+                            <span class="dot"></span>
+                            <span class="name">Negotiator</span>
+                        </div>
+                    </div>
+                    <!-- Live Logs Console -->
+                    <div class="console-wrapper">
+                        <div id="agent-console" class="agent-console">
+                            <div class="console-placeholder" id="console-placeholder">
+                                <span class="material-symbols-outlined placeholder-icon">psychology</span>
+                                <p>Awaiting procurement request.<br>Type your query in the chat to start.</p>
+                                <div class="supported-products">
+                                    <span class="sp-title">Supported Products</span>
+                                    <div class="sp-list">
+                                        <span>Laptops</span><span>Cloud Servers</span><span>Monitors</span>
+                                        <span>Network Switches</span><span>Security Cameras</span><span>Sensors</span>
+                                        <span>PLC Controllers</span><span>Copper Wire</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Input Area -->
+                <div class="chat-input-area">
+                    <input type="text" id="chat-user-input" placeholder="Type your procurement request or ask a question (e.g. 'Source 50 monitors for $200 each')...">
+                    <button type="button" id="chat-send-btn" class="btn-send">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Architecture Info Modal -->
+        <div id="arch-modal" class="arch-modal hidden">
+            <div class="arch-modal-content glass">
+                <div class="arch-modal-header">
+                    <h3><span class="material-symbols-outlined">schema</span> System Architecture</h3>
+                    <button type="button" id="close-arch-btn" class="btn-close"><span class="material-symbols-outlined">close</span></button>
+                </div>
+                <div class="arch-body">
+                    <div class="arch-diagram">
+                        <div class="arch-node arch-user">
+                            <span class="material-symbols-outlined">person</span>
+                            <span>User Request</span>
+                        </div>
+                        <div class="arch-arrow">▼</div>
+                        <div class="arch-node arch-orch">
+                            <span class="material-symbols-outlined">hub</span>
+                            <div>
+                                <strong>Orchestrator Agent</strong>
+                                <small>Routes tasks, enforces security guardrails, compiles final results</small>
+                            </div>
+                        </div>
+                        <div class="arch-branch">
+                            <div class="arch-branch-item">
+                                <div class="arch-arrow-sm">↙</div>
+                                <div class="arch-node arch-sub">
+                                    <span class="material-symbols-outlined">inventory_2</span>
+                                    <div>
+                                        <strong>Sourcing Specialist</strong>
+                                        <small>search_catalog()</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="arch-branch-item">
+                                <div class="arch-arrow-sm">↓</div>
+                                <div class="arch-node arch-sub">
+                                    <span class="material-symbols-outlined">verified_user</span>
+                                    <div>
+                                        <strong>Compliance Auditor</strong>
+                                        <small>get_quote()</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="arch-branch-item">
+                                <div class="arch-arrow-sm">↘</div>
+                                <div class="arch-node arch-sub">
+                                    <span class="material-symbols-outlined">gavel</span>
+                                    <div>
+                                        <strong>Negotiator</strong>
+                                        <small>submit_bid()</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="arch-features">
+                        <div class="arch-feat-item">
+                            <span class="material-symbols-outlined">shield</span>
+                            <div><strong>Security Guardrails</strong><br>Prompt injection detection at orchestrator level blocks malicious inputs before delegation.</div>
+                        </div>
+                        <div class="arch-feat-item">
+                            <span class="material-symbols-outlined">build</span>
+                            <div><strong>3 Specialized Tools</strong><br>search_catalog, get_quote, submit_bid — each tool has Pydantic validation and injection scanning.</div>
+                        </div>
+                        <div class="arch-feat-item">
+                            <span class="material-symbols-outlined">store</span>
+                            <div><strong>3 Vendors, 12 Products</strong><br>Apex Tech, ByteSize Systems, IronForge Industrial — with unique negotiation behaviors.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Deal Comparison Modal/Drawer -->
+        <section id="deal-drawer" class="deal-drawer glass hidden">
+            <div class="drawer-header">
+                <div class="drawer-title">
+                    <span class="material-symbols-outlined text-gold" id="drawer-status-icon">verified</span>
+                    <h3 id="drawer-title-text">Negotiated Deal Summary</h3>
+                </div>
+                <button type="button" id="close-drawer" class="btn-close">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="drawer-content">
+                <div class="deal-grid">
+                    <div class="deal-card card-supplier">
+                        <span class="card-tag">Selected Vendor</span>
+                        <h4 id="res-supplier-name">-</h4>
+                        <div class="vendor-rating">
+                            <span class="material-symbols-outlined">star</span>
+                            <span id="res-supplier-rating">-</span>
+                        </div>
+                    </div>
+                    <div class="deal-card card-pricing">
+                        <span class="card-tag">Financials</span>
+                        <div class="price-box">
+                            <span class="label">Unit Price:</span>
+                            <span class="val text-gold" id="res-unit-price">-</span>
+                        </div>
+                        <div class="price-box">
+                            <span class="label">Total Cost:</span>
+                            <span class="val" id="res-total-price">-</span>
+                        </div>
+                    </div>
+                    <div class="deal-card card-compliance">
+                        <span class="card-tag">Compliance & Warranty</span>
+                        <div class="compliance-status" id="res-compliance-status">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Fully Compliant</span>
+                        </div>
+                        <p class="desc" id="res-sla-desc">-</p>
+                    </div>
+                </div>
+
+                <!-- Comparison Dashboard for all contacted Suppliers -->
+                <div class="deal-comparison-section">
+                    <h5>Supplier Sourcing & Negotiation Comparison</h5>
+                    <div id="deal-comparison-grid" class="deal-comparison-grid">
+                        <!-- Dynamic Comparison Cards -->
+                    </div>
+                </div>
+
+                <!-- NEW: Graphical Negotiation Meter Section -->
+                <div class="negotiation-graph-section">
+                    <h5>Negotiation Breakdown & Margin Threshold Analysis</h5>
+                    <div class="graph-container">
+                        <div class="graph-bar-wrapper">
+                            <div class="graph-bar" id="graph-bar-container">
+                                <div class="bar-segment reject" id="segment-reject" style="width: 80%;" title="Rejection Zone (Too Low)"></div>
+                                <div class="bar-segment counter" id="segment-counter" style="width: 10%;" title="Counter-Offer Zone"></div>
+                                <div class="bar-segment accept" id="segment-accept" style="width: 10%;" title="Acceptance Zone"></div>
+                                <div class="bar-marker" id="bid-marker" style="left: 0%;" title="Negotiated Price Point">
+                                    <div class="marker-line"></div>
+                                    <div class="marker-label">Final Price</div>
+                                </div>
+                            </div>
+                            <div class="graph-labels">
+                                <span class="lbl-left">0%</span>
+                                <span class="lbl-mid-1" id="lbl-counter-thresh" style="left: 80%; transform: translateX(-50%); position: absolute;">80%</span>
+                                <span class="lbl-mid-2" id="lbl-accept-thresh" style="left: 90%; transform: translateX(-50%); position: absolute;">90%</span>
+                                <span class="lbl-right">100%</span>
+                            </div>
+                        </div>
+                        <div class="graph-legend">
+                            <div class="legend-item"><span class="color-box reject"></span><span>Reject Zone (Supplier Declines)</span></div>
+                            <div class="legend-item"><span class="color-box counter"></span><span>Counter Zone (Surcharge/Counter-Offer)</span></div>
+                            <div class="legend-item"><span class="color-box accept"></span><span>Accept Zone (Deal Confirmed)</span></div>
+                        </div>
+                    </div>
+                    <p class="graph-explanation" id="res-graph-explanation">Analysis of the dealer margins and target budget constraints.</p>
+                </div>
+
+                <!-- Contract Agreement draft -->
+                <div class="contract-container" id="drawer-contract-container">
+                    <h5>Negotiated Contract Addendum</h5>
+                    <pre class="contract-text" id="res-contract-text">-</pre>
+                </div>
+
+                <div class="drawer-actions" id="drawer-actions-container">
+                    <button type="button" id="approve-order-btn" class="btn-approve">
+                        <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                        <span>Approve Purchase Order</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- JavaScript File -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
