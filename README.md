@@ -91,7 +91,7 @@ Deal Architect implements **multi-layered security** to prevent prompt injection
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/Juggernaut576/deal-architect.git
 cd deal-architect
 
 # Install dependencies
