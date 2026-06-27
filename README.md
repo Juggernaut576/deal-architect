@@ -13,6 +13,9 @@ pinned: false
 > **Track 1 Winner Candidate** — Kaggle Vibecoding Agents Capstone Project  
 > Built with [Google ADK](https://google.github.io/adk-docs/) + Gemini + FastAPI
 
+🚀 **Live Deployment**: [Hugging Face Space](https://huggingface.co/spaces/Sukrit789/deal-architect)  
+🔗 **GitHub Repository**: [Juggernaut576/deal-architect](https://github.com/Juggernaut576/deal-architect)
+
 ---
 
 ## 🎯 What Is This?
