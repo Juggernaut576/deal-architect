@@ -1,3 +1,13 @@
+---
+title: Deal Architect
+emoji: 🤝
+colorFrom: indigo
+colorTo: blue
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # 🤝 Deal Architect — AI Multi-Agent Procurement & Negotiation System
 
 > **Track 1 Winner Candidate** — Kaggle Vibecoding Agents Capstone Project  
