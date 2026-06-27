@@ -64,7 +64,7 @@ artifact_service_uri = f"gs://{logs_bucket_name}" if logs_bucket_name else None
 
 app: FastAPI = get_fast_api_app(
     agents_dir=AGENT_DIR,
-    web=True,
+    web=False,
     artifact_service_uri=artifact_service_uri,
     allow_origins=allow_origins,
     session_service_uri=session_service_uri,
@@ -99,9 +99,9 @@ app.mount("/static", StaticFiles(directory=static_path), name="static")
 
 
 @app.get("/")
-def redirect_to_dashboard():
-    """Redirect root path to the dashboard."""
-    return RedirectResponse(url="/dashboard")
+def serve_dashboard_root():
+    """Serve the premium glassmorphic dashboard at root."""
+    return FileResponse(os.path.join(static_path, "index.html"))
 
 
 @app.get("/dashboard")
